@@ -30,19 +30,7 @@
 - SQL 資料查詢與報表頁
 - 系統流程圖與文件整理
 
-## 如何啟動
-
-直接開啟 `index.html` 即可查看網站。
-
-## 部署到 GitHub Pages
-
-1. 建立 GitHub Repository
-2. 上傳 `index.html` 與 `style.css`
-3. 到 Settings → Pages
-4. Source 選擇 main branch
-5. 儲存後即可取得作品集網址
-
 ## 聯絡方式
 
 Email: chiu60917@gmail.com
-GitHub: https://github.com/chiu60917
+GitHub: https://github.com/Yvonne1009
