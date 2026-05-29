@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo List 任務清單</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <p class="eyebrow">Portfolio Project 01</p>
+      <h1>Todo List 任務清單</h1>
+      <p>支援新增、完成、刪除、分類篩選與 LocalStorage 儲存。</p>
+    </section>
+
+    <section class="panel">
+      <form id="todoForm" class="todo-form">
+        <input id="todoInput" type="text" placeholder="輸入今天要完成的事情..." autocomplete="off" />
+        <button type="submit">新增</button>
+      </form>
+      <div class="filters">
+        <button class="active" data-filter="all">全部</button>
+        <button data-filter="active">未完成</button>
+        <button data-filter="done">已完成</button>
+      </div>
+      <ul id="todoList" class="todo-list"></ul>
+      <div class="summary">
+        <span id="countText">0 個任務</span>
+        <button id="clearDone">清除已完成</button>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
