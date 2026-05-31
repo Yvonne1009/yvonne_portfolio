@@ -1,5 +1,50 @@
-let records=JSON.parse(localStorage.getItem('yvonne_records')||'[]');const $=s=>document.querySelector(s);
-function money(n){return '$'+Number(n).toLocaleString('zh-TW');}
-function save(){localStorage.setItem('yvonne_records',JSON.stringify(records));}
-function render(){const income=records.filter(r=>r.type==='income').reduce((s,r)=>s+r.amount,0);const expense=records.filter(r=>r.type==='expense').reduce((s,r)=>s+r.amount,0);$('#income').textContent=money(income);$('#expense').textContent=money(expense);$('#balance').textContent=money(income-expense);$('#records').innerHTML='';records.forEach(r=>{const li=document.createElement('li');li.className='record';li.innerHTML=`<div><strong>${r.category}</strong><br><small>${r.note||'無備註'}</small></div><div><strong class="${r.type==='income'?'plus':'minus'}">${r.type==='income'?'+':'-'}${money(r.amount)}</strong><button>刪除</button></div>`;li.querySelector('button').onclick=()=>{records=records.filter(x=>x.id!==r.id);save();render();};$('#records').appendChild(li);});}
-$('#form').onsubmit=e=>{e.preventDefault();const amount=Number($('#amount').value);if(!$('#category').value.trim()||amount<=0)return alert('請輸入分類與正確金額');records.unshift({id:Date.now(),type:$('#type').value,category:$('#category').value.trim(),amount,note:$('#note').value.trim()});$('#category').value='';$('#amount').value='';$('#note').value='';save();render();};render();
+let records = JSON.parse(localStorage.getItem("yvonne_records") || "[]");
+const $ = (s) => document.querySelector(s);
+function money(n) {
+  return "$" + Number(n).toLocaleString("zh-TW");
+}
+function save() {
+  localStorage.setItem("yvonne_records", JSON.stringify(records));
+}
+function render() {
+  const income = records
+    .filter((r) => r.type === "income")
+    .reduce((s, r) => s + r.amount, 0);
+  const expense = records
+    .filter((r) => r.type === "expense")
+    .reduce((s, r) => s + r.amount, 0);
+  $("#income").textContent = money(income);
+  $("#expense").textContent = money(expense);
+  $("#balance").textContent = money(income - expense);
+  $("#records").innerHTML = "";
+  records.forEach((r) => {
+    const li = document.createElement("li");
+    li.className = "record";
+    li.innerHTML = `<div><strong>${r.category}</strong><br><small>${r.note || "無備註"}</small></div><div><strong class="${r.type === "income" ? "plus" : "minus"}">${r.type === "income" ? "+" : "-"}${money(r.amount)}</strong><button>刪除</button></div>`;
+    li.querySelector("button").onclick = () => {
+      records = records.filter((x) => x.id !== r.id);
+      save();
+      render();
+    };
+    $("#records").appendChild(li);
+  });
+}
+$("#form").onsubmit = (e) => {
+  e.preventDefault();
+  const amount = Number($("#amount").value);
+  if (!$("#category").value.trim() || amount <= 0)
+    return alert("請輸入分類與正確金額");
+  records.unshift({
+    id: Date.now(),
+    type: $("#type").value,
+    category: $("#category").value.trim(),
+    amount,
+    note: $("#note").value.trim(),
+  });
+  $("#category").value = "";
+  $("#amount").value = "";
+  $("#note").value = "";
+  save();
+  render();
+};
+render();

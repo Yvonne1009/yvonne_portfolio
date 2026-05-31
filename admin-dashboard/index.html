@@ -1,1 +1,49 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>管理後台 Demo</title><link rel="stylesheet" href="style.css"></head><body><aside><h2>Admin</h2><a class="active">總覽</a><a>帳號管理</a><a>訂單管理</a><a>報表分析</a></aside><main><header><div><p>Portfolio Project 03</p><h1>管理後台 Dashboard</h1></div><input id="keyword" placeholder="搜尋使用者..."></header><section class="cards"><div><span>本月營收</span><strong>$128,600</strong></div><div><span>新增會員</span><strong>342</strong></div><div><span>待處理訂單</span><strong>18</strong></div><div><span>完成率</span><strong>92%</strong></div></section><section class="panel"><div class="panel-title"><h2>使用者列表</h2><button id="addUser">新增使用者</button></div><table><thead><tr><th>姓名</th><th>Email</th><th>角色</th><th>狀態</th><th>操作</th></tr></thead><tbody id="tbody"></tbody></table></section></main><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>管理後台 Demo</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <aside>
+      <h2>Admin</h2>
+      <a class="active">總覽</a><a>帳號管理</a><a>訂單管理</a><a>報表分析</a>
+    </aside>
+    <main>
+      <header>
+        <div>
+          <p>Portfolio Project 03</p>
+          <h1>管理後台 Dashboard</h1>
+        </div>
+        <input id="keyword" placeholder="搜尋使用者..." />
+      </header>
+      <section class="cards">
+        <div><span>本月營收</span><strong>$128,600</strong></div>
+        <div><span>新增會員</span><strong>342</strong></div>
+        <div><span>待處理訂單</span><strong>18</strong></div>
+        <div><span>完成率</span><strong>92%</strong></div>
+      </section>
+      <section class="panel">
+        <div class="panel-title">
+          <h2>使用者列表</h2>
+          <button id="addUser">新增使用者</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>姓名</th>
+              <th>Email</th>
+              <th>角色</th>
+              <th>狀態</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
