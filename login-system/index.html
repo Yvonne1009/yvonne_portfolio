@@ -2,65 +2,185 @@
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>登入系統 Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>會員登入系統 Demo</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="wrap">
-      <section class="intro">
-        <p>Portfolio Project 02</p>
-        <h1>會員登入系統</h1>
-        <span
-          >包含登入、註冊、表單驗證與登入後畫面。此版本使用 LocalStorage
-          模擬會員資料，適合作為前端作品展示。</span
-        >
+    <main class="shell">
+      <section class="intro" aria-labelledby="pageTitle">
+        <p class="eyebrow">Portfolio Project 02</p>
+        <h1 id="pageTitle">會員登入系統</h1>
+        <p>
+          具備登入、註冊、即時驗證、記住登入狀態與會員中心。此版本以
+          LocalStorage 模擬會員資料，適合作為前端作品展示。
+        </p>
+        <ul class="feature-list" aria-label="功能重點">
+          <li>表單欄位檢查與清楚錯誤提示</li>
+          <li>密碼強度、顯示密碼與記住我</li>
+          <li>登入後可編輯會員名稱與查看帳號資訊</li>
+        </ul>
       </section>
-      <section class="card" id="authCard">
-        <div class="tabs">
-          <button class="active" data-tab="login">登入</button
-          ><button data-tab="register">註冊</button>
+
+      <section class="panel" id="authCard" aria-label="會員驗證">
+        <div class="tabs" role="tablist" aria-label="切換表單">
+          <button
+            class="active"
+            type="button"
+            id="loginTab"
+            data-tab="login"
+            role="tab"
+            aria-selected="true"
+            aria-controls="loginForm"
+          >
+            登入
+          </button>
+          <button
+            type="button"
+            id="registerTab"
+            data-tab="register"
+            role="tab"
+            aria-selected="false"
+            aria-controls="registerForm"
+          >
+            註冊
+          </button>
         </div>
-        <form id="loginForm" class="form">
-          <label
-            >Email<input
+
+        <form id="loginForm" class="form" novalidate>
+          <div class="field">
+            <label for="loginEmail">Email</label>
+            <input
               type="email"
               id="loginEmail"
-              placeholder="demo@mail.com" /></label
-          ><label
-            >密碼<input
+              autocomplete="email"
+              placeholder="demo@mail.com"
+              required
+            />
+            <small class="field-error" id="loginEmailError"></small>
+          </div>
+
+          <div class="field">
+            <div class="label-row">
+              <label for="loginPassword">密碼</label>
+              <button
+                class="text-button"
+                type="button"
+                data-toggle-password="loginPassword"
+              >
+                顯示
+              </button>
+            </div>
+            <input
               type="password"
               id="loginPassword"
-              placeholder="123456" /></label
-          ><button type="submit">登入</button><small id="loginMsg"></small>
+              autocomplete="current-password"
+              placeholder="123456"
+              required
+            />
+            <small class="field-error" id="loginPasswordError"></small>
+          </div>
+
+          <label class="check-row" for="rememberMe">
+            <input type="checkbox" id="rememberMe" />
+            <span>記住登入狀態</span>
+          </label>
+
+          <button class="primary-button" type="submit">登入</button>
+          <p class="form-message" id="loginMsg" role="status"></p>
         </form>
-        <form id="registerForm" class="form hidden">
-          <label
-            >姓名<input
+
+        <form id="registerForm" class="form hidden" novalidate>
+          <div class="field">
+            <label for="regName">姓名</label>
+            <input
               type="text"
               id="regName"
-              placeholder="Yvonne Wu" /></label
-          ><label
-            >Email<input
+              autocomplete="name"
+              placeholder="Yvonne Wu"
+              required
+            />
+            <small class="field-error" id="regNameError"></small>
+          </div>
+
+          <div class="field">
+            <label for="regEmail">Email</label>
+            <input
               type="email"
               id="regEmail"
-              placeholder="your@mail.com" /></label
-          ><label
-            >密碼<input
+              autocomplete="email"
+              placeholder="your@mail.com"
+              required
+            />
+            <small class="field-error" id="regEmailError"></small>
+          </div>
+
+          <div class="field">
+            <div class="label-row">
+              <label for="regPassword">密碼</label>
+              <button
+                class="text-button"
+                type="button"
+                data-toggle-password="regPassword"
+              >
+                顯示
+              </button>
+            </div>
+            <input
               type="password"
               id="regPassword"
-              placeholder="至少 6 碼" /></label
-          ><button type="submit">建立帳號</button><small id="regMsg"></small>
+              autocomplete="new-password"
+              placeholder="至少 6 碼，建議包含英文與數字"
+              required
+            />
+            <div class="strength" aria-hidden="true">
+              <span></span>
+            </div>
+            <small class="field-error" id="regPasswordError"></small>
+          </div>
+
+          <button class="primary-button" type="submit">建立帳號</button>
+          <p class="form-message" id="regMsg" role="status"></p>
         </form>
       </section>
-      <section class="card dashboard hidden" id="dashboard">
-        <h2>登入成功</h2>
-        <p id="welcome"></p>
-        <div class="info"><span>狀態</span><strong>已驗證</strong></div>
-        <div class="info"><span>權限</span><strong>一般會員</strong></div>
-        <button id="logout">登出</button>
+
+      <section class="panel dashboard hidden" id="dashboard" aria-label="會員中心">
+        <div class="dashboard-header">
+          <div>
+            <p class="eyebrow">Member Center</p>
+            <h2>登入成功</h2>
+          </div>
+          <button class="ghost-button" type="button" id="logout">登出</button>
+        </div>
+
+        <p id="welcome" class="welcome"></p>
+
+        <div class="stats" aria-label="會員資訊">
+          <div class="info">
+            <span>會員權限</span>
+            <strong>一般會員</strong>
+          </div>
+          <div class="info">
+            <span>登入次數</span>
+            <strong id="loginCount">1</strong>
+          </div>
+          <div class="info">
+            <span>上次登入</span>
+            <strong id="lastLogin">首次登入</strong>
+          </div>
+        </div>
+
+        <form id="profileForm" class="profile-form">
+          <label for="profileName">更新會員姓名</label>
+          <div class="profile-actions">
+            <input type="text" id="profileName" autocomplete="name" />
+            <button class="primary-button" type="submit">儲存</button>
+          </div>
+          <p class="form-message" id="profileMsg" role="status"></p>
+        </form>
       </section>
     </main>
+
     <script src="script.js"></script>
   </body>
 </html>

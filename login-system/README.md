@@ -1,21 +1,29 @@
 # login-system
 
-這是一個適合作品集展示的前端小專案，使用 HTML、CSS、JavaScript 製作。
+會員登入系統前端展示作品，使用 HTML、CSS、JavaScript 與 LocalStorage 模擬會員資料。
 
-## 功能特色
+## 功能
 
+- 登入與註冊分頁
+- Email、姓名、密碼欄位驗證
+- 密碼強度提示與顯示/隱藏密碼
+- 記住登入狀態
+- 登入後會員中心
+- 會員姓名更新
 - RWD 響應式版面
-- 使用者互動功能
-- 清楚的 UI 區塊與操作流程
-- 適合放在 GitHub Pages 展示
+
+## Demo 帳號
+
+- Email: `demo@mail.com`
+- 密碼: `123456`
 
 ## 使用方式
 
-直接用瀏覽器開啟 `index.html` 即可。
+直接開啟 `index.html` 即可操作。
 
-## 可延伸方向
+## 後續可延伸
 
-- 串接後端 API
-- 改成 React / Vue 版本
-- 加入登入驗證與資料庫
-- 部署到 GitHub Pages / Vercel
+- 串接真實 API 與資料庫
+- 導入密碼雜湊與後端 Session/JWT
+- 增加忘記密碼、Email 驗證、會員等級
+- 改寫為 React 或 Vue 元件化版本

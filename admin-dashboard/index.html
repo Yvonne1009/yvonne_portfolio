@@ -2,48 +2,186 @@
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>管理後台 Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>管理後台 Demo | Yvonne Wu</title>
+    <meta
+      name="description"
+      content="一個以 HTML、CSS、JavaScript 製作的響應式管理後台作品，包含資料篩選、排序、新增、編輯與刪除。"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <aside>
-      <h2>Admin</h2>
-      <a class="active">總覽</a><a>帳號管理</a><a>訂單管理</a><a>報表分析</a>
+    <aside class="sidebar" aria-label="主選單">
+      <a class="brand" href="../index.html" aria-label="回到作品集首頁">
+        <span>YW</span>
+        <strong>Admin Panel</strong>
+      </a>
+      <nav class="nav-list">
+        <a class="active" href="#overview">總覽</a>
+        <a href="#members">會員管理</a>
+        <a href="#orders">訂單追蹤</a>
+        <a href="#activity">活動紀錄</a>
+        <a href="#settings">系統設定</a>
+      </nav>
+      <div class="sidebar-card">
+        <span class="status-dot"></span>
+        <p>今日系統狀態</p>
+        <strong>服務正常</strong>
+      </div>
     </aside>
-    <main>
-      <header>
+
+    <main class="dashboard">
+      <header class="topbar">
         <div>
-          <p>Portfolio Project 03</p>
+          <p class="eyebrow">Portfolio Project 03</p>
           <h1>管理後台 Dashboard</h1>
         </div>
-        <input id="keyword" placeholder="搜尋使用者..." />
-      </header>
-      <section class="cards">
-        <div><span>本月營收</span><strong>$128,600</strong></div>
-        <div><span>新增會員</span><strong>342</strong></div>
-        <div><span>待處理訂單</span><strong>18</strong></div>
-        <div><span>完成率</span><strong>92%</strong></div>
-      </section>
-      <section class="panel">
-        <div class="panel-title">
-          <h2>使用者列表</h2>
-          <button id="addUser">新增使用者</button>
+        <div class="topbar-actions">
+          <label class="search">
+            <span>搜尋</span>
+            <input id="keyword" type="search" placeholder="姓名、Email、角色..." />
+          </label>
+          <button class="icon-button" id="exportBtn" type="button" title="匯出目前清單">
+            Export
+          </button>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>姓名</th>
-              <th>Email</th>
-              <th>角色</th>
-              <th>狀態</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody id="tbody"></tbody>
-        </table>
+      </header>
+
+      <section class="metrics" id="overview" aria-label="營運指標">
+        <article class="metric-card">
+          <span>本月營收</span>
+          <strong id="revenueValue">$0</strong>
+          <small>較上月 +12.4%</small>
+        </article>
+        <article class="metric-card">
+          <span>會員總數</span>
+          <strong id="memberValue">0</strong>
+          <small>活躍會員自動統計</small>
+        </article>
+        <article class="metric-card">
+          <span>待處理訂單</span>
+          <strong id="pendingValue">0</strong>
+          <small>含付款與出貨確認</small>
+        </article>
+        <article class="metric-card">
+          <span>客服滿意度</span>
+          <strong>92%</strong>
+          <small>近 30 天回饋</small>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <section class="panel users-panel" id="members">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Members</p>
+              <h2>會員管理</h2>
+            </div>
+            <button id="openFormBtn" class="primary-button" type="button">新增會員</button>
+          </div>
+
+          <div class="filters" aria-label="會員篩選">
+            <button class="filter active" type="button" data-filter="all">全部</button>
+            <button class="filter" type="button" data-filter="active">啟用</button>
+            <button class="filter" type="button" data-filter="inactive">停用</button>
+            <button class="filter" type="button" data-filter="admin">管理者</button>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <button class="sort-button" type="button" data-sort="name">姓名</button>
+                  </th>
+                  <th>Email</th>
+                  <th>
+                    <button class="sort-button" type="button" data-sort="role">角色</button>
+                  </th>
+                  <th>狀態</th>
+                  <th>
+                    <button class="sort-button" type="button" data-sort="spent">消費</button>
+                  </th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="tbody"></tbody>
+            </table>
+          </div>
+          <p id="emptyState" class="empty-state" hidden>找不到符合條件的會員。</p>
+        </section>
+
+        <aside class="right-column">
+          <section class="panel form-panel" id="settings">
+            <div class="panel-title compact">
+              <div>
+                <p class="eyebrow">Editor</p>
+                <h2 id="formTitle">新增會員</h2>
+              </div>
+            </div>
+            <form id="memberForm">
+              <input type="hidden" id="memberId" />
+              <label>
+                姓名
+                <input id="nameInput" type="text" required placeholder="例：Yvonne Wu" />
+              </label>
+              <label>
+                Email
+                <input id="emailInput" type="email" required placeholder="name@example.com" />
+              </label>
+              <div class="form-grid">
+                <label>
+                  角色
+                  <select id="roleInput">
+                    <option>Admin</option>
+                    <option>Editor</option>
+                    <option>Support</option>
+                    <option>Viewer</option>
+                  </select>
+                </label>
+                <label>
+                  狀態
+                  <select id="statusInput">
+                    <option value="active">啟用</option>
+                    <option value="inactive">停用</option>
+                  </select>
+                </label>
+              </div>
+              <label>
+                累積消費
+                <input id="spentInput" type="number" min="0" step="100" required />
+              </label>
+              <div class="form-actions">
+                <button class="primary-button" type="submit">儲存</button>
+                <button class="ghost-button" id="resetFormBtn" type="button">清空</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="panel" id="orders">
+            <div class="panel-title compact">
+              <div>
+                <p class="eyebrow">Orders</p>
+                <h2>訂單追蹤</h2>
+              </div>
+            </div>
+            <div class="order-list" id="orderList"></div>
+          </section>
+
+          <section class="panel" id="activity">
+            <div class="panel-title compact">
+              <div>
+                <p class="eyebrow">Activity</p>
+                <h2>近期活動</h2>
+              </div>
+            </div>
+            <ul class="timeline" id="timeline"></ul>
+          </section>
+        </aside>
       </section>
     </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="script.js"></script>
   </body>
 </html>
