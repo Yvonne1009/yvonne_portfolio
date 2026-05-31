@@ -11,23 +11,34 @@
     <section class="hero">
       <p class="eyebrow">Portfolio Project 01</p>
       <h1>Todo List 任務清單</h1>
-      <p>支援新增、完成、刪除、分類篩選與 LocalStorage 儲存。</p>
+      <p>使用原生 JavaScript 製作的任務管理工具，支援任務新增、編輯、完成狀態、優先順序、篩選與 LocalStorage 資料保存。</p>
     </section>
 
-    <section class="panel">
+    <section class="panel" aria-label="Todo List 應用程式">
       <form id="todoForm" class="todo-form">
         <input id="todoInput" type="text" placeholder="輸入今天要完成的事情..." autocomplete="off" />
+        <select id="priorityInput" aria-label="選擇優先順序">
+          <option value="medium">中優先</option>
+          <option value="high">高優先</option>
+          <option value="low">低優先</option>
+        </select>
         <button type="submit">新增</button>
       </form>
-      <div class="filters">
-        <button class="active" data-filter="all">全部</button>
-        <button data-filter="active">未完成</button>
-        <button data-filter="done">已完成</button>
+
+      <div class="toolbar">
+        <div class="filters" aria-label="任務篩選">
+          <button class="active" data-filter="all" type="button">全部</button>
+          <button data-filter="active" type="button">未完成</button>
+          <button data-filter="done" type="button">已完成</button>
+        </div>
+        <button id="clearDone" type="button">清除已完成</button>
       </div>
+
       <ul id="todoList" class="todo-list"></ul>
+      <p id="emptyState" class="empty-state">目前沒有任務，新增一件今天想完成的事吧。</p>
+
       <div class="summary">
-        <span id="countText">0 個任務</span>
-        <button id="clearDone">清除已完成</button>
+        <span id="countText">0 個任務，0 個未完成</span>
       </div>
     </section>
   </main>
