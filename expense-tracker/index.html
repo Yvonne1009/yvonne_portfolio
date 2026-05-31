@@ -3,48 +3,158 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>記帳網站</title>
+    <title>個人記帳網站 | Expense Tracker</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main class="app">
-      <section class="top">
-        <p>Portfolio Project 04</p>
-        <h1>個人記帳網站</h1>
-        <span
-          >可新增收入/支出、分類紀錄、計算結餘，資料會存在瀏覽器
-          LocalStorage。</span
-        >
+      <header class="top">
+        <div>
+          <p class="eyebrow">Portfolio Project 04</p>
+          <h1>個人記帳網站</h1>
+          <p class="intro">
+            用簡潔的儀表板記錄收入與支出，追蹤每月預算、分類花費與現金流變化。資料會儲存在瀏覽器 LocalStorage。
+          </p>
+        </div>
+        <div class="period-card" aria-label="本月預算狀態">
+          <span>本月預算</span>
+          <strong id="budgetAmount">$0</strong>
+          <div class="budget-track"><span id="budgetBar"></span></div>
+          <small id="budgetHint">尚未設定預算</small>
+        </div>
+      </header>
+
+      <section class="toolbar" aria-label="篩選工具">
+        <label>
+          月份
+          <input id="monthFilter" type="month" />
+        </label>
+        <label>
+          類型
+          <select id="typeFilter">
+            <option value="all">全部</option>
+            <option value="income">收入</option>
+            <option value="expense">支出</option>
+          </select>
+        </label>
+        <label>
+          搜尋
+          <input id="searchInput" placeholder="分類、備註或帳戶" />
+        </label>
+        <button id="exportBtn" class="secondary" type="button">匯出 CSV</button>
       </section>
-      <section class="summary">
-        <div><span>收入</span><strong id="income">$0</strong></div>
-        <div><span>支出</span><strong id="expense">$0</strong></div>
-        <div><span>結餘</span><strong id="balance">$0</strong></div>
+
+      <section class="summary" aria-label="財務摘要">
+        <article>
+          <span>收入</span>
+          <strong id="income">$0</strong>
+          <small id="incomeCount">0 筆收入</small>
+        </article>
+        <article>
+          <span>支出</span>
+          <strong id="expense">$0</strong>
+          <small id="expenseCount">0 筆支出</small>
+        </article>
+        <article>
+          <span>結餘</span>
+          <strong id="balance">$0</strong>
+          <small id="savingRate">儲蓄率 0%</small>
+        </article>
+        <article>
+          <span>日均支出</span>
+          <strong id="dailyAverage">$0</strong>
+          <small>依目前篩選月份計算</small>
+        </article>
       </section>
-      <section class="grid">
-        <form id="form" class="card">
-          <h2>新增紀錄</h2>
-          <label
-            >類型<select id="type">
-              <option value="income">收入</option>
-              <option value="expense">支出</option>
-            </select></label
-          ><label
-            >分類<input id="category" placeholder="餐飲 / 交通 / 薪資" /></label
-          ><label
-            >金額<input id="amount" type="number" placeholder="1000" /></label
-          ><label
-            >備註<input
-              id="note"
-              placeholder="午餐、捷運、接案收入..." /></label
-          ><button>新增</button>
-        </form>
-        <section class="card">
-          <h2>紀錄列表</h2>
-          <ul id="records"></ul>
+
+      <section class="layout">
+        <aside class="panel">
+          <form id="recordForm">
+            <div class="panel-title">
+              <h2 id="formTitle">新增紀錄</h2>
+              <button id="cancelEditBtn" class="ghost hidden" type="button">取消編輯</button>
+            </div>
+
+            <label>
+              日期
+              <input id="date" type="date" required />
+            </label>
+
+            <label>
+              類型
+              <select id="type" required>
+                <option value="expense">支出</option>
+                <option value="income">收入</option>
+              </select>
+            </label>
+
+            <label>
+              分類
+              <input id="category" list="categoryOptions" placeholder="餐飲、薪資、交通" required />
+              <datalist id="categoryOptions">
+                <option value="餐飲"></option>
+                <option value="交通"></option>
+                <option value="購物"></option>
+                <option value="居家"></option>
+                <option value="娛樂"></option>
+                <option value="薪資"></option>
+                <option value="投資"></option>
+                <option value="其他"></option>
+              </datalist>
+            </label>
+
+            <label>
+              金額
+              <input id="amount" type="number" min="1" step="1" placeholder="1000" required />
+            </label>
+
+            <label>
+              帳戶
+              <input id="account" placeholder="現金、信用卡、銀行" />
+            </label>
+
+            <label>
+              備註
+              <textarea id="note" rows="3" placeholder="例如：午餐、房租、設計接案收入"></textarea>
+            </label>
+
+            <button id="submitBtn" type="submit">新增紀錄</button>
+          </form>
+
+          <div class="budget-editor">
+            <h2>預算設定</h2>
+            <label>
+              每月支出預算
+              <input id="budgetInput" type="number" min="0" step="100" placeholder="例如 25000" />
+            </label>
+            <button id="saveBudgetBtn" class="secondary" type="button">儲存預算</button>
+          </div>
+        </aside>
+
+        <section class="workspace">
+          <section class="panel chart-panel">
+            <div class="panel-title">
+              <h2>分類支出</h2>
+              <span id="chartTotal">支出 $0</span>
+            </div>
+            <div id="categoryChart" class="category-chart"></div>
+          </section>
+
+          <section class="panel records-panel">
+            <div class="panel-title">
+              <h2>交易紀錄</h2>
+              <span id="recordCount">0 筆</span>
+            </div>
+            <ul id="records" class="records"></ul>
+            <div id="emptyState" class="empty hidden">
+              <strong>目前沒有符合條件的紀錄</strong>
+              <span>調整篩選條件，或新增一筆收入 / 支出。</span>
+            </div>
+          </section>
         </section>
       </section>
     </main>
+
     <script src="script.js"></script>
   </body>
 </html>

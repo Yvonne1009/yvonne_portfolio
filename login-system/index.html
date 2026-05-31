@@ -1,1 +1,66 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>登入系統 Demo</title><link rel="stylesheet" href="style.css"></head><body><main class="wrap"><section class="intro"><p>Portfolio Project 02</p><h1>會員登入系統</h1><span>包含登入、註冊、表單驗證與登入後畫面。此版本使用 LocalStorage 模擬會員資料，適合作為前端作品展示。</span></section><section class="card" id="authCard"><div class="tabs"><button class="active" data-tab="login">登入</button><button data-tab="register">註冊</button></div><form id="loginForm" class="form"><label>Email<input type="email" id="loginEmail" placeholder="demo@mail.com"></label><label>密碼<input type="password" id="loginPassword" placeholder="123456"></label><button type="submit">登入</button><small id="loginMsg"></small></form><form id="registerForm" class="form hidden"><label>姓名<input type="text" id="regName" placeholder="Yvonne Wu"></label><label>Email<input type="email" id="regEmail" placeholder="your@mail.com"></label><label>密碼<input type="password" id="regPassword" placeholder="至少 6 碼"></label><button type="submit">建立帳號</button><small id="regMsg"></small></form></section><section class="card dashboard hidden" id="dashboard"><h2>登入成功</h2><p id="welcome"></p><div class="info"><span>狀態</span><strong>已驗證</strong></div><div class="info"><span>權限</span><strong>一般會員</strong></div><button id="logout">登出</button></section></main><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>登入系統 Demo</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="intro">
+        <p>Portfolio Project 02</p>
+        <h1>會員登入系統</h1>
+        <span
+          >包含登入、註冊、表單驗證與登入後畫面。此版本使用 LocalStorage
+          模擬會員資料，適合作為前端作品展示。</span
+        >
+      </section>
+      <section class="card" id="authCard">
+        <div class="tabs">
+          <button class="active" data-tab="login">登入</button
+          ><button data-tab="register">註冊</button>
+        </div>
+        <form id="loginForm" class="form">
+          <label
+            >Email<input
+              type="email"
+              id="loginEmail"
+              placeholder="demo@mail.com" /></label
+          ><label
+            >密碼<input
+              type="password"
+              id="loginPassword"
+              placeholder="123456" /></label
+          ><button type="submit">登入</button><small id="loginMsg"></small>
+        </form>
+        <form id="registerForm" class="form hidden">
+          <label
+            >姓名<input
+              type="text"
+              id="regName"
+              placeholder="Yvonne Wu" /></label
+          ><label
+            >Email<input
+              type="email"
+              id="regEmail"
+              placeholder="your@mail.com" /></label
+          ><label
+            >密碼<input
+              type="password"
+              id="regPassword"
+              placeholder="至少 6 碼" /></label
+          ><button type="submit">建立帳號</button><small id="regMsg"></small>
+        </form>
+      </section>
+      <section class="card dashboard hidden" id="dashboard">
+        <h2>登入成功</h2>
+        <p id="welcome"></p>
+        <div class="info"><span>狀態</span><strong>已驗證</strong></div>
+        <div class="info"><span>權限</span><strong>一般會員</strong></div>
+        <button id="logout">登出</button>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
