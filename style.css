@@ -45,7 +45,7 @@ h3 { margin: 0 0 10px; font-size: 21px; }
 .hero-card, .skill-card, .project-card, .service-card, .contact-box {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 28px;
+  border-radius: 8px;
   box-shadow: var(--shadow);
 }
 .hero-card { padding: 30px; transform: rotate(1.5deg); }
@@ -60,6 +60,7 @@ ul { padding-left: 20px; color: var(--muted); }
 .project-list { display: grid; gap: 20px; }
 .project-card { padding: 28px; display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 24px; align-items: start; }
 .project-tag { color: var(--primary-dark) !important; font-weight: 800; font-size: 13px; letter-spacing: 0.05em; margin-top: 0; }
+.project-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
 .contact { display: grid; grid-template-columns: 1fr 0.8fr; gap: 24px; align-items: center; }
 .contact-box { padding: 24px; }
 .contact-box a { color: var(--primary-dark); font-weight: 700; }
